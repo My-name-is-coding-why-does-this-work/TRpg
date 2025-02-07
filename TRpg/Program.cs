@@ -1,24 +1,15 @@
 ﻿class Program
 {
-    static Player player;
-    static Monster monster;
-    static MonsterA monstera;
-    static MonsterB monsterb;
+    public static Player player;
+    public static Monster monster;
+    
 
     static void Main(string[] args)
     {
-        player = new Player
-        {
-            Lv = 1,
-            Name = "코난",
-            IClass = "전사",
-            Attack = 10,
-            Defense = 5,
-            Health = 100,
-            Gold = 1500,
-            IsDead = false,
-        };
+        player = new Player("코난", 1, 10, 5, 100, 1500, "전사");
+
         StartMessage();
+        
     }
 
     static void StartMessage()
@@ -44,7 +35,7 @@
                 case "2":
                     Console.WriteLine("전투를 시작합니다!");
                     Console.ReadKey();
-                    Battle battle = new Battle();
+                    Battle battle = new Battle(player);
                     battle.BattleStart();
                     break;
                 default:

@@ -29,6 +29,17 @@ public class Player : ICharacter
     public int Health { get; set; }
     public int Gold { get; set; }
 
+    public Player(string name, int lv, int attack, int defense, int health, int gold, string iClass)
+    {
+        Name = name;
+        Lv = lv;
+        Attack = attack;
+        Defense = defense;
+        Health = health;
+        Gold = gold;
+        IClass = iClass;
+        IsDead = false;
+    }
     public void PlayerStatus()
     {
         Console.WriteLine($"레벨: {Lv}");
@@ -52,6 +63,18 @@ public class Monster : ICharacter
     public int Defense { get; set; }
     public int Health { get; set; }
     public int Gold { get; set; }
+
+    public Monster(string name, int lv, int attack, int defense, int health, int gold, string iClass)
+    {
+        Name = name;
+        Lv = lv;
+        Attack = attack;
+        Defense = defense;
+        Health = health;
+        Gold = gold;
+        IClass = iClass;
+        IsDead = false;
+    }
 
     public void MonsterStatus()
     {
