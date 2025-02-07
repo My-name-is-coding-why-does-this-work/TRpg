@@ -38,33 +38,5 @@ class Monster
             Console.WriteLine($"공격력: {Attack}");
         }
     }
-class MonsterA
-{
-    public int Lv { get; set; }
-    public string Name { get; set; }
-    public int Health { get; set; }
-    public int Attack { get; set; }
-    public void MonsterAStatus()
-    {
-        Console.WriteLine($"레벨: {Lv}");
-        Console.WriteLine($"이름: {Name}");
-        Console.WriteLine($"체력: {Health}");
-        Console.WriteLine($"공격력: {Attack}");
-    }
-}
-class MonsterB
-{
-    public int Lv { get; set; }
-    public string Name { get; set; }
-    public int Health { get; set; }
-    public int Attack { get; set; }
-    public void MonsterBStatus()
-    {
-        Console.WriteLine($"레벨: {Lv}");
-        Console.WriteLine($"이름: {Name}");
-        Console.WriteLine($"체력: {Health}");
-        Console.WriteLine($"공격력: {Attack}");
-    }
-}
 
 
