@@ -1,18 +1,22 @@
-﻿class Program
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using TRpg;
+
+
+internal class Program
 {
-    public static Player player;
-    public static Monster monster;
-    
 
     static void Main(string[] args)
     {
-        player = new Player("코난", 1, 10, 5, 100, 1500, "전사");
-
-        StartMessage();
+        Player player = new Player("코난", 1, 10, 5, 100, 1500, "전사"); //수정 : player를 Main 안으로
         
+        StartMessage(player); //수정 : 매개 변수 추가
+
     }
 
-    static void StartMessage()
+    static public void StartMessage(Player player) // 수정 : 매개변수, public 메소드로
     {
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");

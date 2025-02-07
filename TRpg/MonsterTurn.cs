@@ -20,27 +20,54 @@ namespace TRpg;
 //zz 다 지워버려...?
 public class MonsterTurn
 {
+    // 수정 : 진행을 위한 각 클래스 변수 선언
+    CalcDamage calc;
+    BattleEndPg endPg = new BattleEndPg();
+    Battle battle;
 
-    public void MonstersTurn()
+    public MonsterTurn(CalcDamage calcDmg) { calc = calcDmg; } // 수정 : 생성자
+
+    public void MonstersTurn(List<Monster> monsterList, Player player) // 수정 : 몬스터 리스트 매개변수
     {
+        battle = new Battle(player); // 수정 : 진행을 위한 Battle 변수 선언
+        Console.Clear();
 
-        foreach (Monster monster in Monsterlist)
+        // 수정 : 몬스터 정보 출력
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            Console.Write($"-{i + 1} ");
+            Console.WriteLine($"{monsterList[i].Name} {monsterList[i].Lv} {monsterList[i].Health}"); 
+        }
+
+
+        Console.WriteLine("");
+        Console.WriteLine("");
+        
+        // 수정 : 플레이어 정보 출력
+        Console.WriteLine("[내정보]");
+        Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
+        Console.WriteLine($"HP {player.Health}\n");
+
+        foreach (Monster monster in monsterList)
         {
             if (!monster.IsDead)
             {
-                Console.Clear();
-                Console.WriteLine($"{monster.name}가 공격했다!");
-                int dmg = CalcDmg(monster, player);
-                if (dmg == 0)
+                Console.WriteLine($"{monster.Name}이(가) 공격했습니다!");
+                int dmg = calc.CalcDmg(monster, player);
+                if (dmg != 0)
                 {
-                    StageClear();
-                    
+                    Console.WriteLine($"{player.Name}이(가) {dmg}를 받았습니다.\n");
+                    Console.ReadKey(true);
                 }
                 else
-                
-                Console.WriteLine($"{player.name}가 {dmg}를 받았다.");
+                {
+                    Console.WriteLine($"{player.Name}이(가) 사망했습니다."); // 수정 : 사망 정보 출력
+                }
             }            
-        } playerTurn();
+        }
+        Console.WriteLine($"{player.Name}의 체력 : {player.Health}"); // 수정 : 남은 체력 출력
+        Console.WriteLine("계속 하시려면 아무키를 입력하세요.");
+        Console.ReadKey(true);
         
     }
 }
