@@ -1,32 +1,54 @@
-﻿//플레이어 HP가 0일때
+﻿public void Start()
+{
+    // 플레이어나 몬스터가 죽었을 때
+    if (player.IsDead)
+    {
+        OnCharacterDeath?.Invoke(player);
+    }
+    else if (monster.IsDead)
+    {
+        OnCharacterDeath?.Invoke(monster);
+    }
+}
 
-//텍스트 문구 [You Win]
+// 배틀페이지 종료후(혹시 몰라서 대비는 해둠)
+private void StageClear(IPlayer player)
+{
+    if (Player is Monster)
+    {
+        Console.WriteLine($"==== You Win {player.Name}가 몬스터를 물리쳤습니다! ====");
+        Console.WriteLine("1. 다음 스테이지");
+        Console.WriteLine("2. 마을로 이동하기");
 
-//텍스트 문구 [던전에서 몬스터 2마리를 잡았습니다.]
-    //던전에 출몰한 몬스터가 몇마리인지 파악해서 불려와야함
+        Console.Write("\n당신의 선택: ");
 
-//텍스트 문구 [Lv. 이름]
-//텍스트 문구 [HP 00 -> 00]
-    //플레이어가 전투를 시작할때 HP, 전투가 끝났을때 HP를 파악해서 불려와야함
+        string input = Console.ReadLine();
+        switch (input)
+        {
+            case "1":
+                player.startMassge();
+                break;
+            case "2":
+                player.nextStage();
+                break;
+            default:
+                Console.WriteLine("잘못된 입력입니다. 1~2 사이의 숫자를 입력하세요.");
+                break;
+        }
+    }
+    else
+    {
+        Console.WriteLine("==== You Lose ====");
+        Console.WriteLine("0. 게임 종료");
 
-//텍스트 문구 [1. 다음]
-    //선택시 battle페이지로 이동함
-//텍스트 문구 [2. 던전나가기]
-    //선택시 시작페이지로 이동함
+        Console.Write("\n당신의 선택: ");
 
-//텍스트 문구 [원하는 행동을 입력해주세요.]
-
-/////////////////////////////////////////////////////////
-
-//몬스터가 전부 Dead일때 or 몬스터의 HP가 전부 0일때
-
-//텍스트 문구 [You Lose]
-
-//텍스트 문구 [Lv. 이름]
-//텍스트 문구 [HP 00 -> 0]
-    //플레이어가 전투를 시작할때 HP를 파악해서 불려와야함
-
-//텍스트 문구 [1. 마을에서 부활하기]
-    //선택시 시작패이지로 이동함 or 게임초기화해야함
-//텍스트 문구 [2. 게임종료하기]
-    //선택시 게임종료함
+        string input = Console.ReadLine();
+        switch (input)
+        {
+            case "0":
+                Console.WriteLine("게임을 종료합니다.");
+                return;
+        }
+    }
+}
