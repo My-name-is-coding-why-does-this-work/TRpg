@@ -32,7 +32,7 @@ public class Battle(Player player)
 
         Random random = new Random();
 
-        int CountMonster = random.Next(0, 4);
+        int CountMonster = random.Next(1, 4);
 
         for (int i = 0; i < CountMonster; i++)
         {
