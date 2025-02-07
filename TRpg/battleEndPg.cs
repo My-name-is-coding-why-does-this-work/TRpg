@@ -1,9 +1,9 @@
 ﻿
-public class BattleEndPg // 수정 : 클래스 선언 안하셨네, 클래스명 처음은 대문자로
+public static class BattleEndPg // 수정 : 클래스 선언 안하셨네, 클래스명 처음은 대문자로
 {
     
     // 배틀페이지 종료후
-    public void StageClear(Player player) //수정 : IPlayer -> Player, public 메소드로
+    public static void StageClear(Player player) //수정 : IPlayer -> Player, public 메소드로
     {
         if (!player.IsDead) // 수정 : 플레이어가 죽지 않고 StageClear 호출
         {

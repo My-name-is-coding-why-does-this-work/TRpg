@@ -18,18 +18,11 @@ namespace TRpg;
 //Monster와 name, Lv, 공격력은 현종님이 만들어뒀으니까 필요시 불려오면 되요(예를들어 공허충이 나타났다는 쓰고싶으면 Console.WriteLine($"{mossterc.Name}'); 이런식으로 가져오면되요)
 
 //zz 다 지워버려...?
-public class MonsterTurn
+public static class MonsterTurn
 {
-    // 수정 : 진행을 위한 각 클래스 변수 선언
-    CalcDamage calc;
-    BattleEndPg endPg = new BattleEndPg();
-    Battle battle;
 
-    public MonsterTurn(CalcDamage calcDmg) { calc = calcDmg; } // 수정 : 생성자
-
-    public void MonstersTurn(List<Monster> monsterList, Player player) // 수정 : 몬스터 리스트 매개변수
+    public static void MonstersTurn(List<Monster> monsterList, Player player) // 수정 : 몬스터 리스트 매개변수
     {
-        battle = new Battle(player); // 수정 : 진행을 위한 Battle 변수 선언
         Console.Clear();
 
         // 수정 : 몬스터 정보 출력
@@ -53,7 +46,7 @@ public class MonsterTurn
             if (!monster.IsDead)
             {
                 Console.WriteLine($"{monster.Name}이(가) 공격했습니다!");
-                int dmg = calc.CalcDmg(monster, player);
+                int dmg = CalcDamage.CalcDmg(monster, player);
                 if (dmg != 0)
                 {
                     Console.WriteLine($"{player.Name}이(가) {dmg}를 받았습니다.\n");

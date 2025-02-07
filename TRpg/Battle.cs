@@ -11,30 +11,10 @@ public class Battle(Player player)
 
     public int killCount = 0; //몬스터 처치 수
 
-    // 수정 : 진행을 위한 각 클래스 변수 선언
-    public BattleEndPg endPg = new BattleEndPg();
-    public static CalcDamage dmgCalc = new CalcDamage();
-    public MonsterTurn mTurn = new MonsterTurn(dmgCalc);
-
-    public void MakeMonster()
-    {
-        Monster monster1 = new Monster("전사 미니언", 1, 10, 5, 50, 20, "미니언");
-        Monster monster2 = new Monster("마법사 미니언", 3, 10, 7, 30, 14, "미니언");
-        Monster monster3 = new Monster("탱크 미니언", 10, 10, 15, 100, 100, "미니언");
-        Monster monster4 = new Monster("공허 유충", 7, 10, 10, 100, 100, "공허 유충");
-
-        MonstersList.Add(monster1);
-        MonstersList.Add(monster2);
-        MonstersList.Add(monster3);
-        MonstersList.Add(monster4);
-    }
-
     public void MakeList()
     {
         MonstersList = new List<Monster>();
         BattleList = new List<Monster>();
-
-        MakeMonster();
 
         Random random = new Random();
 
@@ -42,9 +22,24 @@ public class Battle(Player player)
 
         for (int i = 0; i < CountMonster; i++)
         {
-            int maxVal = MonstersList.Count - 1;
+            int maxVal = 4;
             int SelectMonster = random.Next(0, maxVal);
-            BattleList.Add(MonstersList[SelectMonster]);
+
+            switch (SelectMonster)
+            {
+                case 0:
+                    BattleList.Add(new Monster("전사 미니언", 1, 10, 5, 50, 20, "미니언"));
+                    break;
+                case 1:
+                    BattleList.Add(new Monster("마법사 미니언", 3, 10, 7, 30, 14, "미니언"));
+                    break;
+                case 2:
+                    BattleList.Add(new Monster("탱크 미니언", 10, 10, 15, 100, 100, "미니언"));
+                    break;
+                case 3:
+                    BattleList.Add(new Monster("공허 유충", 7, 10, 10, 100, 100, "공허 유충"));
+                    break;
+            }
         }
     }
 
@@ -91,7 +86,7 @@ public class Battle(Player player)
             if (BattleList.Count == killCount)//몬스터 생존 여부 확인
             {
                 //몬스터 처치시
-                endPg.StageClear(player);
+                BattleEndPg.StageClear(player);
                 //배틀 종료
                 break;
             }
@@ -101,10 +96,10 @@ public class Battle(Player player)
             Console.ReadKey(true);
 
             // 수정 : 몬스터 턴 실행
-            mTurn.MonstersTurn(BattleList, player);
+            MonsterTurn.MonstersTurn(BattleList, player);
             if(player.IsDead) // 수정 : 몬스터의 턴 실행 후 플레이어 사망 시
             {
-                endPg.StageClear(player);
+                BattleEndPg.StageClear(player);
             }
         }
 
@@ -153,7 +148,7 @@ public class Battle(Player player)
                         Console.ReadKey(true);
 
                         // 수정 : 데미지 계산
-                        int dmg = dmgCalc.CalcDmg(player, BattleList[input - 1]); 
+                        int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1]); 
                         if(dmg != 0)
                             Console.WriteLine($"{BattleList[input - 1].Name}이(가) {dmg} 데미지를 받았습니다.");
                         else

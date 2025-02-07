@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TRpg
 {
-    public class CalcDamage
+    public static class CalcDamage
     {
-        int damage; //입힌 피해량
-        int margin; //공격력의 오차 범위 10%
+        static int damage; //입힌 피해량
+        static int margin; //공격력의 오차 범위 10%
 
         //데미지 처리 오버로딩으로 분리
-        public int CalcDmg(Player attacker, Monster defender)
+        public static int CalcDmg(Player attacker, Monster defender)
         {
 
             margin = attacker.Attack / 10;
@@ -31,7 +31,7 @@ namespace TRpg
             return damage;
         }
 
-        public int CalcDmg(Monster attacker, Player defender)
+        public static int CalcDmg(Monster attacker, Player defender)
         {
 
             margin = attacker.Attack / 10;
