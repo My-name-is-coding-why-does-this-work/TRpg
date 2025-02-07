@@ -11,40 +11,20 @@
         {
             Lv = 1,
             Name = "코난",
-            Job = "전사",
+            IClass = "전사",
             Attack = 10,
             Defense = 5,
             Health = 100,
-            Gold = 1500
+            Gold = 1500,
+            IsDead = false,
         };
-        monsterA = new Monster
-        {
-            Lv = 2,
-            Name = "미니언",
-            Health = 15,
-            Attack = 5,
-        };
-        monsterB = new Monster
-        {
-            Lv = 3,
-            Name = "공허충",
-            Health = 10,
-            Attack = 9,
-        };
-        monsterC = new Monster
-        {
-            Lv = 5,
-            Name = "대포미니언",
-            Health = 25,
-            Attack = 8,
-        };
-
+        
         StartMessage();
-
     }
 
     static void StartMessage()
     {
+        Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 전투 시작");
@@ -57,9 +37,13 @@
             switch (input)
             {
                 case "1":
+                    Console.Clear();
                     player.PlayerStatus();
+                    Console.WriteLine("1. 상태 보기");
+                    Console.WriteLine("2. 전투 시작");
                     break;
                 case "2":
+                    Console.Clear();
                     Console.WriteLine("전투를 시작합니다! (전투 로직은 아직 구현되지 않았습니다)");
                     break;
                 default:
