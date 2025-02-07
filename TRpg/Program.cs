@@ -1,9 +1,9 @@
 ﻿class Program
 {
     static Player player;
-    static Monster monsterA;
-    static Monster monsterB;
-    static Monster monsterC;
+    static Monster monster;
+    static MonsterA monstera;
+    static MonsterB monsterb;
 
     static void Main(string[] args)
     {
@@ -17,21 +17,21 @@
             Health = 100,
             Gold = 1500
         };
-        monsterA = new Monster
+        monster = new Monster
         {
             Lv = 2,
             Name = "미니언",
             Health = 15,
             Attack = 5,
         };
-        monsterB = new Monster
+        monstera = new MonsterA
         {
             Lv = 3,
             Name = "공허충",
             Health = 10,
             Attack = 9,
         };
-        monsterC = new Monster
+        monsterb = new MonsterB
         {
             Lv = 5,
             Name = "대포미니언",
