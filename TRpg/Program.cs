@@ -60,7 +60,10 @@
                     player.PlayerStatus();
                     break;
                 case "2":
-                    Console.WriteLine("전투를 시작합니다! (전투 로직은 아직 구현되지 않았습니다)");
+                    Console.WriteLine("전투를 시작합니다!");
+                    Console.ReadKey();
+                    Battle battle = new Battle();
+                    battle.BattleStart();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
