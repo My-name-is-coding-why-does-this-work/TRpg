@@ -1,4 +1,5 @@
 ﻿using System;
+using TRpg;
 
 
 public class Battle(Player player)
@@ -10,25 +11,10 @@ public class Battle(Player player)
 
     public int killCount = 0; //몬스터 처치 수
 
-    public void MakeMonster()
-    {
-        Monster monster1 = new Monster("전사 미니언", 1, 10, 5, 50, 20, "미니언");
-        Monster monster2 = new Monster("마법사 미니언", 3, 10, 7, 30, 14, "미니언");
-        Monster monster3 = new Monster("탱크 미니언", 10, 10, 15, 100, 100, "미니언");
-        Monster monster4 = new Monster("공허 유충", 7, 10, 10, 100, 100, "공허 유충");
-
-        MonstersList.Add(monster1);
-        MonstersList.Add(monster2);
-        MonstersList.Add(monster3);
-        MonstersList.Add(monster4);
-    }
-
     public void MakeList()
     {
         MonstersList = new List<Monster>();
         BattleList = new List<Monster>();
-
-        MakeMonster();
 
         Random random = new Random();
 
@@ -36,9 +22,24 @@ public class Battle(Player player)
 
         for (int i = 0; i < CountMonster; i++)
         {
-            int maxVal = MonstersList.Count - 1;
+            int maxVal = 4;
             int SelectMonster = random.Next(0, maxVal);
-            BattleList.Add(MonstersList[SelectMonster]);
+
+            switch (SelectMonster)
+            {
+                case 0:
+                    BattleList.Add(new Monster("전사 미니언", 1, 10, 5, 50, 20, "미니언"));
+                    break;
+                case 1:
+                    BattleList.Add(new Monster("마법사 미니언", 3, 10, 7, 30, 14, "미니언"));
+                    break;
+                case 2:
+                    BattleList.Add(new Monster("탱크 미니언", 10, 10, 15, 100, 100, "미니언"));
+                    break;
+                case 3:
+                    BattleList.Add(new Monster("공허 유충", 7, 10, 10, 100, 100, "공허 유충"));
+                    break;
+            }
         }
     }
 
@@ -54,7 +55,7 @@ public class Battle(Player player)
 
             for (int i = 0; i < BattleList.Count; i++)
             {
-                Console.WriteLine(BattleList[i].Name);
+                Console.WriteLine($"{BattleList[i].Name} {BattleList[i].Lv} {BattleList[i].Health}");
             }
 
 
@@ -78,18 +79,28 @@ public class Battle(Player player)
             else
             {
                 //잘못입력 했을때
+                Console.WriteLine("잘못된 입력입니다. 턴을 포기합니다.");
             }
+            
 
             if (BattleList.Count == killCount)//몬스터 생존 여부 확인
             {
                 //몬스터 처치시
-                battel = false;
+                BattleEndPg.StageClear(player);
                 //배틀 종료
+                break;
             }
 
             Console.WriteLine("몬스터 턴");
             Console.WriteLine("계속 하시려면 아무키를 입력하세요.");
             Console.ReadKey(true);
+
+            // 수정 : 몬스터 턴 실행
+            MonsterTurn.MonstersTurn(BattleList, player);
+            if(player.IsDead) // 수정 : 몬스터의 턴 실행 후 플레이어 사망 시
+            {
+                BattleEndPg.StageClear(player);
+            }
         }
 
     }
@@ -109,7 +120,7 @@ public class Battle(Player player)
                     for (int i = 0; i < BattleList.Count; i++)
                     {
                         Console.Write($"-{i+1} ");
-                        Console.WriteLine(BattleList[i].Name);
+                        Console.WriteLine($"{BattleList[i].Name} {BattleList[i].Lv} {BattleList[i].Health}");
                     }
 
 
@@ -118,21 +129,36 @@ public class Battle(Player player)
 
                     Console.WriteLine("[내정보]");
                     Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
-                    Console.WriteLine($"HP 100/{player.Health}");
+                    Console.WriteLine($"HP {player.Health}");
 
 
                     Console.WriteLine("\n[행동]\n");
                     Console.WriteLine("\n공격할 몬스터를 선택해주세요.");
                     Console.Write(">>");
+                    int input;
+                    while(!int.TryParse(Console.ReadLine(),out input))
+                    {
+                        Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                        Console.Write(">>");
+                    }
 
-                    int input = int.Parse(Console.ReadLine());
-                    if (input > 0 && input <= BattleList.Count)
+                    if (input > 0 && input <= BattleList.Count && !BattleList[input - 1].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
                     {
                         Console.WriteLine($"{BattleList[input - 1].Name} 공격");
                         Console.ReadKey(true);
+
+                        // 수정 : 데미지 계산
+                        int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1]); 
+                        if(dmg != 0)
+                            Console.WriteLine($"{BattleList[input - 1].Name}이(가) {dmg} 데미지를 받았습니다.");
+                        else
+                        {
+                            killCount++;
+                            Console.WriteLine($"{BattleList[input - 1].Name}의 체력이 0이 되었습니다.");
+                        }
                         playerturn = false;
                     }
-                    else
+                    else // 수정 : 정해진 입력이 아닐 경우 출력
                     {
                         Console.WriteLine("잘못된 입력입니다. 계속 하시려면 아무키를 입력하세요.");
                         Console.ReadKey(true);
