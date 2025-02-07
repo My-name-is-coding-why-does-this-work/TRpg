@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-class Player
+public class Player
 {
     public int Lv { get; set; }
     public string Name { get; set; }
@@ -24,7 +24,7 @@ class Player
         Console.WriteLine($"골드: {Gold}G");
     }
 }
-class Monster
+public class Monster
     {
         public int Lv { get; set; }
         public string Name { get; set; }
