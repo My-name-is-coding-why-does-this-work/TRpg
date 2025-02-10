@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 
 public interface ICharacter
-
 {
     public bool IsDead { get; set; }
     public int Lv { get; set; }
@@ -22,12 +21,14 @@ public class Skill
     public string Name { get; set; }
     public int ManaCost { get; set; }
     public int Damege {  get; set; }
+    public bool Mul {  get; set; }
 
-    public Skill(string name, int manaCost, int damege)
+    public Skill(string name, int manaCost, int damege, bool mul)
     {
         Name = name;
         ManaCost = manaCost;
         Damege = damege;
+        Mul = mul;
     }
 }
 

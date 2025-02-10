@@ -165,7 +165,7 @@ public class Battle(Player player)
                 }                
                 break;
             case "2":
-                BattleSkill.BattleSkillUI(player, BattleList);
+                BattleSkill.BattleSkillUI(player, BattleList, killCount);
                 break;
         }
 	}
