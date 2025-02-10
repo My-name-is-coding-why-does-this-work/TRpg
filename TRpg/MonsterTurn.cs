@@ -28,11 +28,16 @@ public static class MonsterTurn
         // 수정 : 몬스터 정보 출력
         for (int i = 0; i < monsterList.Count; i++)
         {
+            if (monsterList[i].IsDead)
+                Console.ForegroundColor = ConsoleColor.Red; // 몬스터가 사망했을때 빨간색
+            else
+                Console.ForegroundColor = ConsoleColor.White; // 몬스터가 사망하지않았을때 흰색
+
             Console.Write($"-{i + 1} ");
             Console.WriteLine($"{monsterList[i].Name} {monsterList[i].Lv} {monsterList[i].Health}"); 
         }
 
-
+        Console.ResetColor(); // 색상 최기화
         Console.WriteLine("");
         Console.WriteLine("");
         
