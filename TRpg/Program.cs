@@ -14,6 +14,9 @@ internal class Program
         
         StartMessage(player); //수정 : 매개 변수 추가
 
+        GameManager gameManager = new GameManager();
+        // 인벤토리 출력
+        gameManager.ShowInventory();
     }
 
     static public void StartMessage(Player player) // 수정 : 매개변수, public 메소드로
@@ -21,7 +24,9 @@ internal class Program
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
         Console.WriteLine("1. 상태 보기");
-        Console.WriteLine("2. 전투 시작");
+        Console.WriteLine("2. 인벤토리 보기");
+        Console.WriteLine("3. 상점 보기");
+        Console.WriteLine("4. 전투 시작");
         Console.WriteLine("원하시는 행동을 입력해주세요.");
 
         while (true)
@@ -37,6 +42,16 @@ internal class Program
                     Console.WriteLine("2. 전투 시작");
                     break;
                 case "2":
+                    Console.WriteLine();
+                    inventory.ShowInventory();
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    Console.Clear();
+                    Console.WriteLine("1. 상태 보기");
+                    Console.WriteLine("2. 전투 시작");
+                    break;
+                case "4":
                     Console.WriteLine("전투를 시작합니다!");
                     Console.ReadKey();
                     Battle battle = new Battle(player);
