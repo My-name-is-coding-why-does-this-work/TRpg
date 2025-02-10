@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 
 public interface ICharacter
-
 {
     public bool IsDead { get; set; }
     public int Lv { get; set; }
@@ -17,6 +16,23 @@ public interface ICharacter
     //public void Status();
 }
 
+public class Skill
+{
+    public string Name { get; set; }
+    public int ManaCost { get; set; }
+    public int Damege {  get; set; }
+    public bool Multiple {  get; set; }
+    public string Description { get; set; }
+
+    public Skill(string name, int manaCost, int damege, bool mul, string description)
+    {
+        Name = name;
+        ManaCost = manaCost;
+        Damege = damege;
+        Multiple = mul;
+        Description = description;
+    }
+}
 
 public class Player : ICharacter
 {
@@ -27,18 +43,27 @@ public class Player : ICharacter
     public int Attack { get; set; }
     public int Defense { get; set; }
     public int Health { get; set; }
+    public int Mana { get; set; }
     public int Gold { get; set; }
+    public List<Skill> SkillList { get; set; }
+    
 
-    public Player(string name, int lv, int attack, int defense, int health, int gold, string iClass)
+    public Player(string name, int lv, int attack, int defense, int health, int mana, int gold, string iClass)
     {
         Name = name;
         Lv = lv;
         Attack = attack;
         Defense = defense;
         Health = health;
+        Mana = mana;
         Gold = gold;
         IClass = iClass;
         IsDead = false;
+        SkillList = new List<Skill>();
+    }
+    public void AddSkill(Skill skill)
+    {
+        SkillList.Add(skill);
     }
     public void PlayerStatus()
     {
@@ -48,7 +73,15 @@ public class Player : ICharacter
         Console.WriteLine($"공격력: {Attack}");
         Console.WriteLine($"방어력: {Defense}");
         Console.WriteLine($"체력: {Health}");
+        Console.WriteLine($"마나: {Mana}");
         Console.WriteLine($"골드: {Gold}G");
+
+        Console.WriteLine("\n[스킬]");
+        //추가된 스킬 출력
+        for ( int i = 0; i < SkillList.Count; i++ )
+        {
+            Console.WriteLine($"{SkillList[i].Name} | 마나 소모 {SkillList[i].ManaCost} | 데미지 {SkillList[i].Damege} | 설명 {SkillList[i].Description} ");
+        }
     }
 }
 

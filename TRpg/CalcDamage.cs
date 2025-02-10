@@ -29,7 +29,6 @@ namespace TRpg
             if (dodge > (100 - defender.dodge))
                 damage = -1;
 
-
             if (defender.Health < damage)
             {
                 defender.Health = 0;
@@ -59,12 +58,10 @@ namespace TRpg
             if (dodge > (100 - defender.dodge))
                 damage = 0;
 
-
             if (defender.Health <= damage)
             {
                 defender.Health = 0;
                 defender.IsDead = true;
-
             }
             else
             {
@@ -72,6 +69,4 @@ namespace TRpg
             }
             return damage;
         }
-        
-    }
 }
