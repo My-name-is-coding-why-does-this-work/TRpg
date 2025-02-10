@@ -69,7 +69,7 @@ public class Battle(Player player)
 
             Console.WriteLine("\n[행동]\n");
             Console.WriteLine("1. 공격");
-            Console.WriteLine("2. 방어");
+            Console.WriteLine("2. 스킬");
             Console.WriteLine("\n원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
@@ -123,7 +123,6 @@ public class Battle(Player player)
                         Console.WriteLine($"{BattleList[i].Name} {BattleList[i].Lv} {BattleList[i].Health}");
                     }
 
-
                     Console.WriteLine("");
                     Console.WriteLine("");
 
@@ -166,8 +165,7 @@ public class Battle(Player player)
                 }                
                 break;
             case "2":
-                //방어
-                Console.WriteLine("방어");
+                BattleSkill.BattleSkillUI(player, BattleList);
                 break;
         }
 	}

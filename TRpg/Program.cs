@@ -6,7 +6,7 @@
 
     static void Main(string[] args)
     {
-        player = new Player("코난", 1, 10, 5, 100, 1500, "전사");
+        player = new Player("코난", 1, 10, 5, 100, 100, 1500, "전사");
 
         StartMessage();
         
@@ -20,24 +20,40 @@
                 player.Attack = 10;
                 player.Defense = 10;
                 player.Health = 200;
+                player.Mana = 50;
                 player.IClass = "전사";
+                Skill skill1 = new Skill("찌르기", 20, 30);
+                Skill skill2 = new Skill("올려배기", 20, 30);
+                Skill skill3 = new Skill("가로배기", 20, 30);
+                player.AddSkill(skill1);
+                player.AddSkill(skill2);
+                player.AddSkill(skill3);
                 break;
             case "2":
                 player.Attack = 20;
                 player.Defense = 5;
                 player.Health = 100;
+                player.Mana = 50;
                 player.IClass = "궁수";
+                Skill skill4 = new Skill("파워 샷", 20, 30);
+                Skill skill5 = new Skill("더블 샷", 20, 30);
+                Skill skill6 = new Skill("멀티 샷", 20, 30);
+                player.AddSkill(skill4);
+                player.AddSkill(skill5);
+                player.AddSkill(skill6);
                 break;
             case "3":
                 player.Attack = 5;
                 player.Defense = 0;
                 player.Health = 50;
+                player.Mana = 300;
                 player.IClass = "마법사";
                 break;
             case "4":
                 player.Attack = 15;
                 player.Defense = 8;
                 player.Health = 130;
+                player.Mana = 100;
                 player.IClass = "도적";
                 break;
             default:
@@ -45,6 +61,7 @@
                 break;
 
         }
+
     }
 
     public static void StartMessage()
