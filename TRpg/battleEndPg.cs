@@ -9,14 +9,14 @@ public static class BattleEndPg
     };
 
 
-    public static void StageClear(Player player)
+    public static void StageClear(Player player, int gold = 0)
     {
         if (!player.IsDead)
         {
             Console.WriteLine($"==== You Win {player.Name}가 몬스터를 물리쳤습니다! ====");
-            int goldReward = new Random().Next(50, 201); // 50~200G 랜덤 지급
-            player.Gold += goldReward;
-            Console.WriteLine($"보상: {goldReward}G 획득!");
+
+            player.Gold += gold;
+            Console.WriteLine($"골드 {gold}G 획득!");
 
             // 아이템 보상 지급
             Item rewardItem = RewardItems[new Random().Next(RewardItems.Count)];

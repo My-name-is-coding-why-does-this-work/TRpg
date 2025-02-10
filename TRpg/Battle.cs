@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using TRpg;
 
 
@@ -10,6 +11,18 @@ public class Battle(Player player)
     List<Monster> BattleList; // 배틀이 시작하면 랜덤으로 몬스터를 
 
     public int killCount = 0; //몬스터 처치 수
+    
+    //전투 승리 시 지급할 몬스터 골드
+    public int GetGold(List<Monster> list)
+    {
+        int sum = 0;
+
+        foreach (Monster m in list) 
+        {
+            sum += m.Gold;
+        }
+        return sum;
+    }
 
     public void MakeList()
     {
@@ -90,7 +103,7 @@ public class Battle(Player player)
             if (BattleList.Count == killCount)//몬스터 생존 여부 확인
             {
                 //몬스터 처치시
-                BattleEndPg.StageClear(player);
+                BattleEndPg.StageClear(player, GetGold(BattleList)); //전투 승리시 스테이지 클리어 및 골드 전달
                 //배틀 종료
                 break;
             }
