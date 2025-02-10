@@ -13,12 +13,13 @@ namespace TRpg
         static int margin; //공격력의 오차 범위 10%
 
         //데미지 처리 오버로딩으로 분리
-        public static int CalcDmg(Player attacker, Monster defender)
+        public static int CalcDmg(Player attacker, Monster defender, int skillNm = 0)
         {
             margin = attacker.Attack / 10;
 
             damage = new Random().Next(attacker.Attack - margin, attacker.Attack + margin + 1);
 
+            damage = damage * skillList[skillNm] / 100;
 
             int crit = new Random().Next(0, 101);
             int dodge = new Random().Next(0, 101);
@@ -56,15 +57,14 @@ namespace TRpg
                 damage *= 160 / 100;
 
             if (dodge > (100 - defender.dodge))
-                damage = -1;
+                damage = 0;
 
 
-            if (defender.Health < damage)
+            if (defender.Health <= damage)
             {
                 defender.Health = 0;
                 defender.IsDead = true;
 
-                return 0;
             }
             else
             {
