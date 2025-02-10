@@ -10,14 +10,13 @@ internal class Program
 
     static void Main(string[] args)
     {
-        player = new Player("코난", 1, 10, 5, 100, 100, 1500, "전사");
-        StartMessage();
-
+        Player player = new Player("코난", 1, 10, 5, 100, 100, 1500, "전사");
+        
         StartMessage(player); //수정 : 매개 변수 추가
 
     }
 
-    public static void SelectClass(string selectClass)
+    public static void SelectClass(Player player, string selectClass) //player 매개변수 추가
     {
         switch (selectClass)
         {
@@ -70,7 +69,7 @@ internal class Program
 
     }
 
-    public static void StartMessage()
+    public static void StartMessage(Player player) // 사라진 player 매개변수 다시 추가
     {
         //플레이어 이름 입력 창
         Console.Clear();
@@ -89,7 +88,7 @@ internal class Program
         Console.WriteLine("4. 도적");
         Console.Write("\n>>");
         string inputClass = Console.ReadLine();
-        SelectClass(inputClass);
+        SelectClass(player, inputClass);
 
 
         Console.Clear();

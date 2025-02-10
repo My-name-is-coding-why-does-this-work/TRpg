@@ -19,21 +19,21 @@ namespace TRpg
 
             damage = new Random().Next(attacker.Attack - margin, attacker.Attack + margin + 1);
 
-            damage = damage * skillList[skillNm] / 100;
+            damage = damage * attacker.SkillList[skillNm].Damege / 100;
 
             int crit = new Random().Next(0, 101);
             int dodge = new Random().Next(0, 101);
-            if (crit < attacker.critical)
+            if (crit < 15)
                 damage *= 160 / 100;
 
-            if (dodge > (100 - defender.dodge))
+            if (dodge > 85)
                 damage = -1;
 
             if (defender.Health < damage)
             {
                 defender.Health = 0;
                 defender.IsDead = true;
-                
+
                 return 0;
             }
             else
@@ -52,10 +52,10 @@ namespace TRpg
 
             int crit = new Random().Next(0, 101);
             int dodge = new Random().Next(0, 101);
-            if (crit < attacker.critical)
+            if (crit < 15)
                 damage *= 160 / 100;
 
-            if (dodge > (100 - defender.dodge))
+            if (dodge > 85)
                 damage = 0;
 
             if (defender.Health <= damage)
@@ -69,4 +69,5 @@ namespace TRpg
             }
             return damage;
         }
+    }
 }
