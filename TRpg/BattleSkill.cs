@@ -29,6 +29,7 @@ namespace TRpg
                 Console.WriteLine("[내정보]");
                 Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
                 Console.WriteLine($"HP {player.Health}");
+                Console.WriteLine($"MP {player.Mana}");
 
 
                 Console.WriteLine("\n[스킬]\n");
@@ -38,36 +39,45 @@ namespace TRpg
                 }
                 Console.WriteLine("\n사용할 스킬을 선택해주세요.");
                 Console.Write(">>");
-                int selectSkill; // 선택한 스킬
-                while (!int.TryParse(Console.ReadLine(), out selectSkill))
+                int selectSkill = 0; // 선택한 스킬
+                while (!int.TryParse(Console.ReadLine(), out selectSkill) || selectSkill <= 0 || selectSkill > player.SkillList.Count) //조건 추가
                 {
                     Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
                     Console.Write(">>");
                 }
+                
 
-                if (player.SkillList[selectSkill-1].Multiple == true)
+                if (selectSkill > 0 && player.SkillList[selectSkill-1].Multiple == true)// 다중 공격 // 수정 조건 추가
                 {
-                    for (int i = 0; i<BattleList.Count; i++)
+                    player.Mana -= player.SkillList[selectSkill - 1].ManaCost; //추가 사용한 스킬 마나코스트만큼 소모
+
+                    Console.WriteLine($"{player.SkillList[selectSkill-1].Name}사용 {player.SkillList[selectSkill - 1].ManaCost} 마나 소모");
+                    //사용 스킬 텍스트 출력
+                    Random random = new Random(); //수정 랜덤 값을 이용해 2명 공격
+
+                    for (int i = 0; i < 2; i++)
                     {
-                        if (!BattleList[i].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
+                        int num = random.Next(0, BattleList.Count);
+                        if (!BattleList[num].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
                         {
-                            Console.WriteLine($"{BattleList[i].Name} 공격");
+                            Console.WriteLine($"{BattleList[num].Name} 공격");
                             Console.ReadKey(true);
 
                             //전달해야 할 선택한 스킬 selectSkill
-                            int dmg = CalcDamage.CalcDmg(player, BattleList[i], selectSkill);
+                            int dmg = CalcDamage.CalcDmg(player, BattleList[num], selectSkill);
                             if (dmg != -1)
-                                Console.WriteLine($"{BattleList[i].Name}이(가) {dmg} 데미지를 받았습니다.");
-                            else Console.WriteLine($"{BattleList[i].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+                                Console.WriteLine($"{BattleList[num].Name}이(가) {dmg} 데미지를 받았습니다.");
+                            else Console.WriteLine($"{BattleList[num].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
 
-                            if (BattleList[i].IsDead)
+                            if (BattleList[num].IsDead)
                             {
                                 killCount++;
-                                Console.WriteLine($"{BattleList[i].Name}의 체력이 0이 되었습니다.");
+                                Console.WriteLine($"{BattleList[num].Name}의 체력이 0이 되었습니다.");
                             }
-                            playerturn = false;
+                            
                         }
                     }
+                    playerturn = false;
                     break;
                 }
                 else
@@ -90,7 +100,7 @@ namespace TRpg
                         Console.WriteLine("[내정보]");
                         Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
                         Console.WriteLine($"HP {player.Health}");
-
+                        Console.WriteLine($"MP {player.Mana}");
 
                         Console.WriteLine("\n[행동]\n");
                         Console.WriteLine("\n공격할 몬스터를 선택해주세요.");
@@ -104,6 +114,8 @@ namespace TRpg
 
                         if (input > 0 && input <= BattleList.Count && !BattleList[input - 1].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
                         {
+                            player.Mana -= player.SkillList[selectSkill - 1].ManaCost; // 사용한 스킬 마나코스트만큼 소모
+                            Console.WriteLine($"{player.SkillList[selectSkill - 1].Name} 사용 {player.SkillList[selectSkill - 1].ManaCost} 마나 소모");
                             Console.WriteLine($"{BattleList[input - 1].Name} 공격");
                             Console.ReadKey(true);
 
