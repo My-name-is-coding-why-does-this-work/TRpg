@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 public interface ICharacter
+
 {
     public bool IsDead { get; set; }
     public int Lv { get; set; }
@@ -28,6 +29,17 @@ public class Player : ICharacter
     public int Health { get; set; }
     public int Gold { get; set; }
 
+    public Player(string name, int lv, int attack, int defense, int health, int gold, string iClass)
+    {
+        Name = name;
+        Lv = lv;
+        Attack = attack;
+        Defense = defense;
+        Health = health;
+        Gold = gold;
+        IClass = iClass;
+        IsDead = false;
+    }
     public void PlayerStatus()
     {
         Console.WriteLine($"레벨: {Lv}");
@@ -40,6 +52,7 @@ public class Player : ICharacter
     }
 }
 
+
 public class Monster : ICharacter
 {
     public bool IsDead { get; set; }
@@ -51,6 +64,18 @@ public class Monster : ICharacter
     public int Health { get; set; }
     public int Gold { get; set; }
 
+    public Monster(string name, int lv, int attack, int defense, int health, int gold, string iClass)
+    {
+        Name = name;
+        Lv = lv;
+        Attack = attack;
+        Defense = defense;
+        Health = health;
+        Gold = gold;
+        IClass = iClass;
+        IsDead = false;
+    }
+
     public void MonsterStatus()
     {
         Console.WriteLine($"레벨: {Lv}");
@@ -59,3 +84,4 @@ public class Monster : ICharacter
         Console.WriteLine($"공격력: {Attack}");
     }
 }
+
