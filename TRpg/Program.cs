@@ -22,9 +22,9 @@
                 player.Mana = 50;
                 player.IClass = "전사";
                 //스킬데미지는 퍼센트로 생각하고 적을게요
-                player.AddSkill(new Skill("찌르기", 20, 170, false));
-                player.AddSkill(new Skill("올려배기", 20, 150, false));
-                player.AddSkill(new Skill("가로배기", 20, 120, true));
+                player.AddSkill(new Skill("찌르기", 20, 170, false, "검으로 공격력의 170% 데미지로 찌른다"));
+                player.AddSkill(new Skill("올려배기", 20, 150, false, "검으로 공격력의 150% 데미지로 올려밴다"));
+                player.AddSkill(new Skill("가로배기", 20, 120, true, "검으로 공격력의 120% 데미지로 가로로 밴다"));
                 break;
             case "2":
                 player.Attack = 20;
@@ -32,12 +32,9 @@
                 player.Health = 100;
                 player.Mana = 50;
                 player.IClass = "궁수";
-                Skill skill4 = new Skill("파워 샷", 20, 170, false);
-                Skill skill5 = new Skill("더블 샷", 20, 150, false);
-                Skill skill6 = new Skill("멀티 샷", 20, 120, true);
-                player.AddSkill(skill4);
-                player.AddSkill(skill5);
-                player.AddSkill(skill6);
+                player.AddSkill(new Skill("파워 샷", 20, 170, false, "공격력의 170% 데미지로 강력하게 쏜다"));
+                player.AddSkill(new Skill("더블 샷", 20, 150, false, "빠르게 두번쏴 공격력의 150% 데미지를 준다"));
+                player.AddSkill(new Skill("멀티 샷", 20, 120, true, "공격력의 120% 데미지로 여러명을 쏜다"));
                 break;
             case "3":
                 player.Attack = 5;
@@ -45,9 +42,9 @@
                 player.Health = 50;
                 player.Mana = 300;
                 player.IClass = "마법사";
-                player.AddSkill(new Skill("체인 라이트닝", 80, 200, true));
-                player.AddSkill(new Skill("플레임 스윕", 80, 200, true));
-                player.AddSkill(new Skill("제네시스", 120, 300, true));
+                player.AddSkill(new Skill("체인 라이트닝", 80, 200, true, "번개를 공격력의 200% 데미지로 여려명에게 쏜다"));
+                player.AddSkill(new Skill("플레임 스윕", 80, 200, true, "화염을 공격력의 200% 데미지로 여려명에게 쏜다"));
+                player.AddSkill(new Skill("제네시스", 120, 300, true, "성스러운 힘으로 공격력의 300% 데미지로 여려명에게 쏜다"));
                 break;
             case "4":
                 player.Attack = 15;
@@ -55,9 +52,9 @@
                 player.Health = 130;
                 player.Mana = 100;
                 player.IClass = "도적";
-                player.AddSkill(new Skill("럭키 세븐", 20, 170, false));
-                player.AddSkill(new Skill("더블 스탭", 20, 150, false));
-                player.AddSkill(new Skill("슈리켄 버스트", 20, 130, true));
+                player.AddSkill(new Skill("럭키 세븐", 20, 170, false, "표창을 던져 공격력의 170% 데미지를 준다"));
+                player.AddSkill(new Skill("더블 스탭", 20, 150, false, "두번 공격하여 공격력의 150% 데미지를 준다"));
+                player.AddSkill(new Skill("슈리켄 버스트", 20, 130, true, "수리검을 공격력의 130% 데미지로 여려명에게 쏜다"));
                 break;
             default:
                 //잘못된 선택을 했을때 출력

@@ -21,14 +21,16 @@ public class Skill
     public string Name { get; set; }
     public int ManaCost { get; set; }
     public int Damege {  get; set; }
-    public bool Mul {  get; set; }
+    public bool Multiple {  get; set; }
+    public string Description { get; set; }
 
-    public Skill(string name, int manaCost, int damege, bool mul)
+    public Skill(string name, int manaCost, int damege, bool mul, string description)
     {
         Name = name;
         ManaCost = manaCost;
         Damege = damege;
-        Mul = mul;
+        Multiple = mul;
+        Description = description;
     }
 }
 
@@ -78,7 +80,7 @@ public class Player : ICharacter
         //추가된 스킬 출력
         for ( int i = 0; i < SkillList.Count; i++ )
         {
-            Console.WriteLine($"{SkillList[i].Name} 마나 소모 {SkillList[i].ManaCost} 데미지 {SkillList[i].Damege}");
+            Console.WriteLine($"{SkillList[i].Name} | 마나 소모 {SkillList[i].ManaCost} | 데미지 {SkillList[i].Damege} | 설명 {SkillList[i].Description} ");
         }
     }
 }

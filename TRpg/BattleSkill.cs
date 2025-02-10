@@ -34,7 +34,7 @@ namespace TRpg
                 Console.WriteLine("\n[스킬]\n");
                 for (int i = 0; i < player.SkillList.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {player.SkillList[i].Name} 마나 소모 {player.SkillList[i].ManaCost} 데미지 {player.SkillList[i].Damege}");
+                    Console.WriteLine($"{i + 1}. {player.SkillList[i].Name} | 마나 소모 {player.SkillList[i].ManaCost} | 데미지 {player.SkillList[i].Damege} | 설명 {player.SkillList[i].Description}");
                 }
                 Console.WriteLine("\n사용할 스킬을 선택해주세요.");
                 Console.Write(">>");
