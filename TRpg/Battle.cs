@@ -68,7 +68,7 @@ public class Battle(Player player)
 
             Console.WriteLine("[내정보]");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
-            Console.WriteLine($"HP 100/{player.Health}");
+            Console.WriteLine($"HP {player.Health}");
 
 
             Console.WriteLine("\n[행동]\n");
@@ -159,9 +159,11 @@ public class Battle(Player player)
 
                         // 수정 : 데미지 계산
                         int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1]); 
-                        if(dmg != 0)
+                        if(dmg != -1)
                             Console.WriteLine($"{BattleList[input - 1].Name}이(가) {dmg} 데미지를 받았습니다.");
-                        else
+                        else Console.WriteLine($"{BattleList[input - 1].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+
+                        if (BattleList[input - 1].IsDead)
                         {
                             killCount++;
                             Console.WriteLine($"{BattleList[input - 1].Name}의 체력이 0이 되었습니다.");
@@ -176,7 +178,7 @@ public class Battle(Player player)
                 }                
                 break;
             case "2":
-                BattleSkill.BattleSkillUI(player, BattleList, killCount);
+                BattleSkill.BattleSkillUI(player, BattleList, ref killCount);
                 break;
         }
 	}

@@ -52,12 +52,17 @@ public static class MonsterTurn
             {
                 Console.WriteLine($"{monster.Name}이(가) 공격했습니다!");
                 int dmg = CalcDamage.CalcDmg(monster, player);
-                if (dmg != 0)
+                if (dmg != -1)
                 {
                     Console.WriteLine($"{player.Name}이(가) {dmg}를 받았습니다.\n");
                     Console.ReadKey(true);
                 }
                 else
+                {
+                    Console.WriteLine($"{player.Name}이(가) 공격을 회피했습니다.\n"); //회피 출력 추가
+                    Console.ReadKey(true);
+                }
+                if(player.IsDead)
                 {
                     Console.WriteLine($"{player.Name}이(가) 사망했습니다."); // 수정 : 사망 정보 출력
                 }

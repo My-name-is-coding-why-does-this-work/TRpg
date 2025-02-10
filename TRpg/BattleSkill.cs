@@ -9,7 +9,7 @@ namespace TRpg
 {
     internal class BattleSkill
     {
-        public static void BattleSkillUI(Player player, List<Monster> BattleList, int killCount)
+        public static void BattleSkillUI(Player player, List<Monster> BattleList, ref int killCount)
         {
             bool playerturn = true;
             while (playerturn) // 사용할 스킬 선택 반복문
@@ -55,17 +55,20 @@ namespace TRpg
                             Console.ReadKey(true);
 
                             //전달해야 할 선택한 스킬 selectSkill
-                            int dmg = CalcDamage.CalcDmg(player, BattleList[i]/*, selectSkill*/);
-                            if (dmg != 0)
+                            int dmg = CalcDamage.CalcDmg(player, BattleList[i], selectSkill);
+                            if (dmg != -1)
                                 Console.WriteLine($"{BattleList[i].Name}이(가) {dmg} 데미지를 받았습니다.");
-                            else
+                            else Console.WriteLine($"{BattleList[i].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+
+                            if (BattleList[i].IsDead)
                             {
                                 killCount++;
                                 Console.WriteLine($"{BattleList[i].Name}의 체력이 0이 되었습니다.");
                             }
                             playerturn = false;
                         }
-                    } 
+                    }
+                    break;
                 }
                 else
                 {
@@ -105,15 +108,18 @@ namespace TRpg
                             Console.ReadKey(true);
 
                             //전달해야 할 선택한 스킬 selectSkill
-                            int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1]/*, selectSkill*/);
-                            if (dmg != 0)
+                            int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1], selectSkill);
+                            if (dmg != -1)
                                 Console.WriteLine($"{BattleList[input - 1].Name}이(가) {dmg} 데미지를 받았습니다.");
-                            else
+                            else Console.WriteLine($"{BattleList[input - 1].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+
+                            if (BattleList[input - 1].IsDead)
                             {
                                 killCount++;
                                 Console.WriteLine($"{BattleList[input - 1].Name}의 체력이 0이 되었습니다.");
                             }
                             playerturn = false;
+                            break;
                         }
                         else
                         {
