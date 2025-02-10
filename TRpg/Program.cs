@@ -16,11 +16,11 @@ internal class Program
 
     }
 
-    public static void SelectClass(Player player, string selectClass) //player 매개변수 추가
+    public static void SelectClass(Player player, int selectClass) //player 매개변수 추가
     {
         switch (selectClass)
         {
-            case "1":
+            case 1:
                 player.Attack = 10;
                 player.Defense = 10;
                 player.Health = 200;
@@ -31,7 +31,7 @@ internal class Program
                 player.AddSkill(new Skill("올려배기", 20, 150, false, "검으로 공격력의 150% 데미지로 올려밴다"));
                 player.AddSkill(new Skill("가로배기", 20, 120, true, "검으로 공격력의 120% 데미지로 가로로 밴다"));
                 break;
-            case "2":
+            case 2:
                 player.Attack = 20;
                 player.Defense = 5;
                 player.Health = 100;
@@ -41,7 +41,7 @@ internal class Program
                 player.AddSkill(new Skill("더블 샷", 20, 150, false, "빠르게 두번쏴 공격력의 150% 데미지를 준다"));
                 player.AddSkill(new Skill("멀티 샷", 20, 120, true, "공격력의 120% 데미지로 여러명을 쏜다"));
                 break;
-            case "3":
+            case 3:
                 player.Attack = 5;
                 player.Defense = 0;
                 player.Health = 50;
@@ -51,7 +51,7 @@ internal class Program
                 player.AddSkill(new Skill("플레임 스윕", 80, 200, true, "화염을 공격력의 200% 데미지로 여려명에게 쏜다"));
                 player.AddSkill(new Skill("제네시스", 120, 300, true, "성스러운 힘으로 공격력의 300% 데미지로 여려명에게 쏜다"));
                 break;
-            case "4":
+            case 4:
                 player.Attack = 15;
                 player.Defense = 8;
                 player.Health = 130;
@@ -61,10 +61,6 @@ internal class Program
                 player.AddSkill(new Skill("더블 스탭", 20, 150, false, "두번 공격하여 공격력의 150% 데미지를 준다"));
                 player.AddSkill(new Skill("슈리켄 버스트", 20, 130, true, "수리검을 공격력의 130% 데미지로 여려명에게 쏜다"));
                 break;
-            default:
-                //잘못된 선택을 했을때 출력
-                break;
-
         }
 
     }
@@ -87,9 +83,14 @@ internal class Program
         Console.WriteLine("3. 마법사");
         Console.WriteLine("4. 도적");
         Console.Write("\n>>");
-        string inputClass = Console.ReadLine();
-        SelectClass(player, inputClass);
 
+        int inputClass = 0;
+        while (!int.TryParse(Console.ReadLine(), out inputClass) || inputClass <= 0 || inputClass > 4) //수정 제공된 선택지 이외 선택시 다시 선택하라는 문구 출력
+        {
+            Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+            Console.Write(">>");
+        }
+        SelectClass(player, inputClass);
 
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");

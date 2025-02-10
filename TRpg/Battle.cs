@@ -82,7 +82,7 @@ public class Battle(Player player)
             Console.WriteLine("[내정보]");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
             Console.WriteLine($"HP {player.Health}");
-
+            Console.WriteLine($"MP {player.Mana}");
 
             Console.WriteLine("\n[행동]\n");
             Console.WriteLine("1. 공격");
@@ -153,7 +153,7 @@ public class Battle(Player player)
                     Console.WriteLine("[내정보]");
                     Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
                     Console.WriteLine($"HP {player.Health}");
-
+                    Console.WriteLine($"MP {player.Mana}");
 
                     Console.WriteLine("\n[행동]\n");
                     Console.WriteLine("\n공격할 몬스터를 선택해주세요.");
