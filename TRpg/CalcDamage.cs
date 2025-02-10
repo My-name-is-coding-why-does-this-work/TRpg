@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,20 @@ namespace TRpg
         //데미지 처리 오버로딩으로 분리
         public static int CalcDmg(Player attacker, Monster defender)
         {
-
             margin = attacker.Attack / 10;
+
             damage = new Random().Next(attacker.Attack - margin, attacker.Attack + margin + 1);
+
+
+            int crit = new Random().Next(0, 101);
+            int dodge = new Random().Next(0, 101);
+            if (crit < attacker.critical)
+                damage *= 160 / 100;
+
+            if (dodge > (100 - defender.dodge))
+                damage = -1;
+
+
             if (defender.Health < damage)
             {
                 defender.Health = 0;
@@ -36,6 +48,17 @@ namespace TRpg
 
             margin = attacker.Attack / 10;
             damage = new Random().Next(attacker.Attack - margin, attacker.Attack + margin + 1);
+
+
+            int crit = new Random().Next(0, 101);
+            int dodge = new Random().Next(0, 101);
+            if (crit < attacker.critical)
+                damage *= 160 / 100;
+
+            if (dodge > (100 - defender.dodge))
+                damage = -1;
+
+
             if (defender.Health < damage)
             {
                 defender.Health = 0;
@@ -49,6 +72,6 @@ namespace TRpg
             }
             return damage;
         }
-
+        
     }
 }
