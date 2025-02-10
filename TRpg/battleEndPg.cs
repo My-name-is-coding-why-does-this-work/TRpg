@@ -17,7 +17,7 @@ public static class BattleEndPg // 수정 : 클래스 선언 안하셨네, 클�
             switch (input)
             {
                 case "1":
-                    Program.StartMessage(player);
+                    //Program.StartMessage(player);
                     break;
                 case "2": // 수정 : 미구현 부분 주석 처리
  //                   player.nextStage();
