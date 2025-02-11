@@ -31,12 +31,15 @@ public static class BattleEndPg
             string input = Console.ReadLine();
             switch (input)
             {
-                case "1":
+                case "1":// 수정 : 미구현 부분 주석 처리
+                         //                   player.nextStage();
+                         //                   break;
+                    Console.WriteLine("미구현된 기능입니다. 마을로 돌아갑니다.");
                     Program.StartMessage(player);
                     break;
-                case "2": // 수정 : 미구현 부분 주석 처리
-                          //                   player.nextStage();
-                          //                   break;
+                case "2": 
+                    Program.StartMessage(player);
+                    break;
                 default:
                     Console.WriteLine("잘못된 입력입니다. 1~2 사이의 숫자를 입력하세요.");
                     break;
