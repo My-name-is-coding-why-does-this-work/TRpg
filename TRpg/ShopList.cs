@@ -34,12 +34,15 @@ public class ShopList
 
     public void SettingShop()
     {
-        // 아이템목록
+       shopList.Add(new ShopItem("검"(int)category.Weapon,5,0,100 );
+       shopList.Add(new ShopItem("방패"(int)category.Weapon,10,0,100 );
+       shopList.Add(new ShopItem("갑옷"(int)category.Weapon,10,0,100 );
+       
     }
 
     public void ShopMenu(Player player)
     {
-        int count = 0;
+        int count = 1;
         do
         {
             Console.Clear();
