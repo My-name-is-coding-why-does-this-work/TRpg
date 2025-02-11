@@ -9,43 +9,72 @@ namespace TRpg
 {
     public class Inventory
     {
-        List<Item> itemList;
-        Player player;
-        Inventory inventory;
+        private List<Item> items;
 
         public Inventory()
         {
-            inventory = new Inventory();
-            List<Item> itemList = new List<Item>
-            {
-            new Item("검", ItemType.Weapon,5, 0, 100),
-            new Item("방패",ItemType.Weapon, 10, 0, 100),
-            new Item("갑옷", ItemType.Weapon, 10, 0, 100),
-            };
-
-            foreach (var item in itemList)
-            {
-                inventory.AddItem(item);
-            }
-
+            items = new List<Item>();
         }
-    
-    
-    public void ShowInventory()
+
+        public void AddItem(Item item)
         {
-            Console.WriteLine("\n===== 인벤토리 =====");
-            if (itemList.Count == 0)
+            items.Add(item);
+            Console.WriteLine($"{item.Name}이(가) 인벤토리에 추가되었습니다.");
+        }
+
+        public void RemoveItem(Item item)
+        {
+            if (items.Remove(item))
             {
-                Console.WriteLine("인벤토리에 아이템이 없습니다");
+                Console.WriteLine($"{item.Name}이(가) 인벤토리에서 제거되었습니다.");
             }
             else
             {
-                foreach(var item in itemList)
+                Console.WriteLine($"{item.Name}이(가) 인벤토리에 없습니다.");
+            }
+        }
+
+        public void EquipItem(Item item)
+        {
+            if (items.Contains(item) && !item.IsEquipped)
+            {
+                item.IsEquipped = true;
+                Console.WriteLine($"{item.Name}이(가) 장착되었습니다.");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name}이(가) 인벤토리에 없거나 이미 장착되어 있습니다.");
+            }
+        }
+
+        public void UnequipItem(Item item)
+        {
+            if (items.Contains(item) && item.IsEquipped)
+            {
+                item.IsEquipped = false;
+                Console.WriteLine($"{item.Name}이(가) 장착 해제되었습니다.");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name}이(가) 인벤토리에 없거나 이미 장착 해제되어 있습니다.");
+            }
+        }
+
+        public void ShowInventory()
+        {
+            Console.WriteLine("\n===== 인벤토리 =====");
+            if (items.Count == 0)
+            {
+                Console.WriteLine("인벤토리에 아이템이 없습니다.");
+            }
+            else
+            {
+                foreach (var item in items)
                 {
                     item.ItemStatus();
                 }
             }
-            Console.WriteLine();
+            Console.WriteLine("====================");
         }
     }
 }

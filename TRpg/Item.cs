@@ -11,6 +11,7 @@ namespace TRpg
         Weapon,
         Armor
     }
+
     public class Item
     {
         public string Name { get; }
