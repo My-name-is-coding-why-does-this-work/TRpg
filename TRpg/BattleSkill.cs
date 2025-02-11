@@ -19,10 +19,15 @@ namespace TRpg
 
                 for (int i = 0; i < BattleList.Count; i++)
                 {
+                    if (BattleList[i].IsDead)
+                        Console.ForegroundColor = ConsoleColor.Red; // 몬스터가 사망했을때 빨간색
+                    else
+                        Console.ForegroundColor = ConsoleColor.White; // 몬스터가 사망하지않았을때 흰색
                     Console.Write($"-{i + 1} ");
                     Console.WriteLine($"{BattleList[i].Name} {BattleList[i].Lv} {BattleList[i].Health}");
                 }
 
+                Console.ResetColor(); // 색상 초기화
                 Console.WriteLine("");
                 Console.WriteLine("");
 
@@ -55,24 +60,59 @@ namespace TRpg
                     //사용 스킬 텍스트 출력
                     Random random = new Random(); //수정 랜덤 값을 이용해 2명 공격
 
+                    
+                    List<int> monsterCountList = new List<int>();
+                    List<int> randomSkillAttack = new List<int>();
+                    
+
+                    for (int i = 0; i < BattleList.Count; i++)
+                    {
+                        if (BattleList[i].IsDead == false)
+                        {
+                            monsterCountList.Add(i);
+                        }
+                    }
+
                     for (int i = 0; i < 2; i++)
                     {
-                        int num = random.Next(0, BattleList.Count);
-                        if (!BattleList[num].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
+                        if (monsterCountList.Count > 1)
                         {
-                            Console.WriteLine($"{BattleList[num].Name} 공격");
+                            int num = random.Next(0, monsterCountList.Count);
+                            randomSkillAttack.Add(monsterCountList[num]);
+                            monsterCountList.Remove(num);
+                        }
+                        else
+                        {
+                            for (int j = 0; j < BattleList.Count; j++)
+                            {
+                                if (BattleList[j].IsDead == false)
+                                {
+                                    randomSkillAttack.Add(j);
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+                    for (int i = 0; i < randomSkillAttack.Count; i++)
+                    {
+                        if (!BattleList[randomSkillAttack[i]].IsDead) // 수정 : 선택한 몬스터가 사망하지 않았을때만 실행
+                        {
+                            Console.WriteLine($"{BattleList[randomSkillAttack[i]].Name} 공격");
                             Console.ReadKey(true);
 
                             //전달해야 할 선택한 스킬 selectSkill
-                            int dmg = CalcDamage.CalcDmg(player, BattleList[num], selectSkill);
+                            int dmg = CalcDamage.CalcDmg(player, BattleList[randomSkillAttack[i]], selectSkill);
                             if (dmg != -1)
-                                Console.WriteLine($"{BattleList[num].Name}이(가) {dmg} 데미지를 받았습니다.");
-                            else Console.WriteLine($"{BattleList[num].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+                                Console.WriteLine($"{BattleList[randomSkillAttack[i]].Name}이(가) {dmg} 데미지를 받았습니다.");
+                            else Console.WriteLine($"{BattleList[randomSkillAttack[i]].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
 
-                            if (BattleList[num].IsDead)
+                            if (BattleList[randomSkillAttack[i]].IsDead)
                             {
                                 killCount++;
-                                Console.WriteLine($"{BattleList[num].Name}의 체력이 0이 되었습니다.");
+                                Console.WriteLine($"{BattleList[randomSkillAttack[i]].Name}의 체력이 0이 되었습니다.");
                             }
                             
                         }
@@ -90,10 +130,14 @@ namespace TRpg
 
                         for (int i = 0; i < BattleList.Count; i++)
                         {
+                            if (BattleList[i].IsDead)
+                                Console.ForegroundColor = ConsoleColor.Red; // 몬스터가 사망했을때 빨간색
+                            else
+                                Console.ForegroundColor = ConsoleColor.White; // 몬스터가 사망하지않았을때 흰색
                             Console.Write($"-{i + 1} ");
                             Console.WriteLine($"{BattleList[i].Name} {BattleList[i].Lv} {BattleList[i].Health}");
                         }
-
+                        Console.ResetColor(); // 색상 초기화
                         Console.WriteLine("");
                         Console.WriteLine("");
 
