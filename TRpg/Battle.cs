@@ -11,7 +11,7 @@ public class Battle(Player player)
     List<Monster> BattleList; // 배틀이 시작하면 랜덤으로 몬스터를 
 
     public int killCount = 0; //몬스터 처치 수
-    
+
     //전투 승리 시 지급할 몬스터 골드
     public int GetGold(List<Monster> list)
     {
@@ -59,7 +59,11 @@ public class Battle(Player player)
 	public void BattleStart()
 	{
         MakeList();
+        doBattle();//기존 선택지를 매서드로 만들어서 호출
 
+    }
+    public void doBattle() // 배틀선택지 메서드
+    {
         bool battel = true;
         while (battel)
         {
@@ -90,15 +94,14 @@ public class Battle(Player player)
             Console.WriteLine("\n원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            string select = Console.ReadLine();
-
-            if (select == "1" || select == "2") playerTurn(select);
-            else
+            int select = 0;
+            //수정 잘못된 선택지 했을때 다시입력하라는 텍스트 출력
+            while (!int.TryParse(Console.ReadLine(), out select) && select < 1 && select > 2) 
             {
-                //잘못입력 했을때
-                Console.WriteLine("잘못된 입력입니다. 턴을 포기합니다.");
+                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
+                Console.Write(">> ");
             }
-            
+            playerTurn(select);
 
             if (BattleList.Count == killCount)//몬스터 생존 여부 확인
             {
@@ -114,20 +117,19 @@ public class Battle(Player player)
 
             // 수정 : 몬스터 턴 실행
             MonsterTurn.MonstersTurn(BattleList, player);
-            if(player.IsDead) // 수정 : 몬스터의 턴 실행 후 플레이어 사망 시
+            if (player.IsDead) // 수정 : 몬스터의 턴 실행 후 플레이어 사망 시
             {
                 BattleEndPg.StageClear(player);
             }
         }
-
     }
 
-	public void playerTurn(string select)
+	public void playerTurn(int select)
 	{
         bool playerturn = true;
 		switch(select)
 		{
-            case "1":
+            case 1:
                 //공격
                 while (playerturn)
                 {
@@ -190,8 +192,9 @@ public class Battle(Player player)
                     }
                 }                
                 break;
-            case "2":
+            case 2:
                 BattleSkill.BattleSkillUI(player, BattleList, ref killCount);
+                doBattle();
                 break;
         }
 	}

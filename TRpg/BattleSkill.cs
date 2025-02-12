@@ -36,18 +36,34 @@ namespace TRpg
                 Console.WriteLine($"HP {player.Health}");
                 Console.WriteLine($"MP {player.Mana}");
 
-
+                int curSkill;
                 Console.WriteLine("\n[스킬]\n");
-                for (int i = 0; i < player.SkillList.Count; i++)
+                for (curSkill = 0; curSkill < player.SkillList.Count; curSkill++)
                 {
-                    Console.WriteLine($"{i + 1}. {player.SkillList[i].Name} | 마나 소모 {player.SkillList[i].ManaCost} | 데미지 {player.SkillList[i].Damege} | 설명 {player.SkillList[i].Description}");
+                    Console.WriteLine($"{curSkill + 1}. {player.SkillList[curSkill].Name} | 마나 소모 {player.SkillList[curSkill].ManaCost} | 데미지 {player.SkillList[curSkill].Damege} | 설명 {player.SkillList[curSkill].Description}");
                 }
                 Console.WriteLine("\n사용할 스킬을 선택해주세요.");
+                Console.WriteLine("\n0. 돌아가기");
                 Console.Write(">>");
-                int selectSkill = 0; // 선택한 스킬
-                while (!int.TryParse(Console.ReadLine(), out selectSkill) || selectSkill <= 0 || selectSkill > player.SkillList.Count) //조건 추가
+                int selectSkill; //수정 선택한 스킬
+
+                
+                while (!int.TryParse(Console.ReadLine(), out selectSkill) || selectSkill < 1 ||
+                    selectSkill > player.SkillList.Count || player.Mana < player.SkillList[selectSkill - 1].ManaCost) //조건 추가
                 {
-                    Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                    if (selectSkill == 0) //추가 0번 누르면 스킬 선택 반복문 정지
+                    {
+                        playerturn = false;
+                        break;
+                    }
+                    else if (selectSkill > 0 && selectSkill <= player.SkillList.Count && player.SkillList[selectSkill - 1].ManaCost > player.Mana)//수정 마나 부족 텍스트 출력
+                    {
+                        Console.WriteLine("마나가 부족합니다.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                    }
                     Console.Write(">>");
                 }
                 
