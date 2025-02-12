@@ -42,6 +42,9 @@ public class Player : ICharacter
     }
     public void PlayerStatus()
     {
+        Console.WriteLine();
+        Console.WriteLine("캐릭터 상태를 보여줍니다.");
+        Console.WriteLine();
         Console.WriteLine($"레벨: {Lv}");
         Console.WriteLine($"이름: {Name}");
         Console.WriteLine($"직업: {IClass}");
@@ -49,9 +52,10 @@ public class Player : ICharacter
         Console.WriteLine($"방어력: {Defense}");
         Console.WriteLine($"체력: {Health}");
         Console.WriteLine($"골드: {Gold}G");
+        Console.WriteLine();
+        Console.WriteLine("원하시는 행동을 입력해주세요.\n");
     }
 }
-
 
 public class Monster : ICharacter
 {
