@@ -91,7 +91,7 @@ public class ShopList
 
             if (act == 0)
             {
-                Console.WriteLine("0. 마을로 돌아갑니다.");
+                Console.WriteLine("마을로 돌아갑니다.");
                 Console.WriteLine("아무키를 입력해주세요");
                 Console.ReadKey(true);
                 Program.Town(player);
@@ -108,12 +108,15 @@ public class ShopList
     {
         Console.WriteLine("\n-------------------------------------------\n");
         Console.WriteLine("현재 G : " + player.Gold + "G\n");
+        Console.WriteLine();
         Console.WriteLine("구매할 아이템을 선택하세요. ( 0. 나가기  |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
-
+        Console.Write("\n>>");
         while (!int.TryParse(Console.ReadLine(), out act))
         {
             Console.WriteLine("잘못된 입력입니다.");
+            Console.WriteLine();
             Console.WriteLine("구매할 아이템을 선택하세요. ( 0. 나가기   |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
+            Console.Write("\n>>");
         }
 
         if (act > 0 && act <= shopList.Count) // 2.12 아이템 구매 및 나가기 시 행동 실행

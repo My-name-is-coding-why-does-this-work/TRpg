@@ -80,6 +80,7 @@ internal class Program
         //플레이어 이름 입력 창
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
+        Console.WriteLine();
         Console.WriteLine("플레이어 이름을 입력하세요");
         Console.Write("\n>>");
         player.Name = Console.ReadLine();
@@ -87,6 +88,7 @@ internal class Program
         //플레이어 직업 선택 창
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
+        Console.WriteLine();
         Console.WriteLine("플레이어 직업을 선택하세요");
         Console.WriteLine("1. 전사");
         Console.WriteLine("2. 궁수");
@@ -109,11 +111,14 @@ internal class Program
     static public void Town(Player player){
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
+        Console.WriteLine();
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 인벤토리 보기");
         Console.WriteLine("3. 상점 보기");
         Console.WriteLine("4. 전투 시작");
+        Console.WriteLine();
         Console.WriteLine("원하시는 행동을 입력해주세요.");
+        Console.Write("\n>>");
 
         while (true)
         {
@@ -124,7 +129,8 @@ internal class Program
                 case "1":
                     Console.Clear();
                     player.PlayerStatus();
-                    Console.WriteLine("0. 메인 화면"); // 메인 화면으로 돌아가기 옵션
+                    Console.WriteLine("0. 메인 화면으로 돌아가기"); // 메인 화면으로 돌아가기 옵션
+                    Console.Write("\n>>");
                     string statusInput = Console.ReadLine();
                     if (statusInput == "0")
                     {
@@ -152,7 +158,7 @@ internal class Program
                     break;
 
                 default:
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
                     break;
             }
         }

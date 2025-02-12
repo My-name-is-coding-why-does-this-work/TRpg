@@ -99,8 +99,8 @@ namespace TRpg
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\n===== 인벤토리 =====");
-
+                Console.WriteLine("***** 인벤토리 *****");
+                Console.WriteLine();
                 // 인벤토리가 비어있는지 확인
                 if (inventoryItem.Count == 0)
                 {
@@ -116,11 +116,13 @@ namespace TRpg
                         item.ItemStatus();
                         i++;
                     }
-                    Console.WriteLine("장착할 아이템 번호를 입력해주세요.");
                     Console.WriteLine();
+                    Console.WriteLine("장착할 아이템 번호를 입력해주세요.");
                 }
 
-                Console.WriteLine("\n0. 메인 화면으로 돌아가기");
+                Console.WriteLine("0. 메인 화면으로 돌아가기");
+                Console.WriteLine();
+                Console.Write("\n>>");
 
                 string input = Console.ReadLine();
 

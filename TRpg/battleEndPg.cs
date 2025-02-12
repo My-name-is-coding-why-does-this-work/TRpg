@@ -15,8 +15,8 @@ public static class BattleEndPg
     {
         if (!player.IsDead)
         {
-            Console.WriteLine($"==== You Win {player.Name}가 몬스터를 물리쳤습니다! ====");
-
+            Console.WriteLine($"***** You Win {player.Name}가 몬스터를 물리쳤습니다! *****");
+            Console.WriteLine();
             player.Gold += gold;
             Console.WriteLine($"골드 {gold}G 획득!");
 
@@ -26,8 +26,9 @@ public static class BattleEndPg
             Inventory.inventory.AddItem(rewardItem);
 
             Console.WriteLine("1. 마을로 이동하기");
-
+            Console.WriteLine();
             Console.Write("\n당신의 선택: ");
+            Console.Write("\n>>");
 
             string input = Console.ReadLine();
             switch (input)
@@ -36,15 +37,16 @@ public static class BattleEndPg
                     Program.Town(player);
                     break;
                 default:
-                    Console.WriteLine("잘못된 입력입니다. 1~2 사이의 숫자를 입력하세요.");
+                    Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
                     break;
             }
         }
         else
         {
-            Console.WriteLine("==== You Lose ====");
+            Console.WriteLine("***** You Lose *****");
+            Console.WriteLine();
             Console.WriteLine("0. 게임 종료");
-
+            Console.WriteLine();
             Console.Write("\n당신의 선택: ");
 
             string input = Console.ReadLine();
