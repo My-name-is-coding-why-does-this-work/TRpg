@@ -25,13 +25,15 @@ namespace TRpg
             int crit = new Random().Next(0, 101);
             int dodge = new Random().Next(0, 101);
 
-            if (dodge > 85)
-                damage = -1;
+            if (dodge > 85) {
+                return -1;
+            }
+                
 
             if (crit < 15)
             {
                 Console.WriteLine("크리티컬!");
-                damage = damage * 300 / 100;
+                damage = damage * 16 / 10;
             }
 
             if (defender.Health <= damage)
@@ -55,11 +57,15 @@ namespace TRpg
 
             int crit = new Random().Next(0, 101);
             int dodge = new Random().Next(0, 101);
-            if (crit < 15)
-                damage *= 160 / 100;
 
             if (dodge > 85)
-                damage = -1;
+            {
+                return -1;
+            }
+
+            if (crit < 15)
+                damage *= 16 / 10;
+
 
             if (defender.Health <= damage)
             {
