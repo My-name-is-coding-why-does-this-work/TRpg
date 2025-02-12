@@ -37,11 +37,11 @@ namespace TRpg
         public void ItemStatus()// 아이템 인터페이스
         {
             Console.Write($" {(IsEquipped ? "[E]" : "")}  {Name}");
-            Console.Write($"| 타입: {Type}");
-            if (Type == ItemType.Weapon) Console.Write($" | 공격력: {Attack}");
-            else if (Type == ItemType.Armor) Console.Write($" | 방어력: {Defense}");
-            else if (Type == ItemType.Test) Console.Write($" | 공격력: {Attack} | 방어력: {Defense}");
-            Console.WriteLine($" | {Description}");
+            Console.Write($"    |   장비 : {Type}");
+            if (Type == ItemType.Weapon) Console.Write($"   |   공격력: {Attack}");
+            else if (Type == ItemType.Armor) Console.Write($"   |   방어력: {Defense}");
+            else if (Type == ItemType.Test) Console.Write($"    |   공격력: {Attack} |   방어력: {Defense}");
+            Console.WriteLine($"    |    {Description}");
         }
 
     }
@@ -50,11 +50,11 @@ namespace TRpg
             public List<Item> itemLists = new List<Item>();
         public ItemList() // 수정 : 가격 수정
         {
-            itemLists.Add(new Item("단검", ItemType.Weapon, 10, 0, 100, "수련용 단검이다."));
-            itemLists.Add(new Item("천갑옷", ItemType.Armor, 0, 15, 100, "평범한 천갑옷이다."));
-            itemLists.Add(new Item("롱소드", ItemType.Weapon, 20, 0, 1000, "평범한 롱소드다."));
-            itemLists.Add(new Item("몰락한 왕의 검", ItemType.Weapon, 30, 0, 1000, "몰락한 왕의 검이다 불길한 기운이 든다."));
-            itemLists.Add(new Item("낡은 방패", ItemType.Armor, 0, 10, 1000, "평범한 방패다."));
+            itemLists.Add(new Item("단검", ItemType.Weapon , 10 , 0 , 100 , "수련용 단검이다."));
+            itemLists.Add(new Item("천갑옷", ItemType.Armor, 0 , 15 , 100 , "평범한 천갑옷이다."));
+            itemLists.Add(new Item("롱소드", ItemType.Weapon , 20 , 0 , 1000 , "평범한 롱소드다."));
+            itemLists.Add(new Item("몰락한 왕의 검", ItemType.Weapon , 30 , 0 , 1500 , "몰락한 왕의 검이다 불길한 기운이 든다."));
+            itemLists.Add(new Item("브라움의 방패", ItemType.Armor , 0 , 20 , 1000 , "자세히 보면 문인것 같다..."));
         }
     }
 }
