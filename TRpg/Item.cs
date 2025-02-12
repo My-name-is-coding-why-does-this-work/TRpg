@@ -36,11 +36,11 @@ namespace TRpg
 
         public void ItemStatus()// 아이템 인터페이스
         {
-            Console.Write($" {(IsEquipped ? "[E]" : "")} 이름:  {Name}");
+            Console.Write($" {(IsEquipped ? "[E]" : "")}  {Name}");
             Console.Write($"| 타입: {Type}");
-            if (Type == ItemType.Weapon) Console.Write($"| 공격력: {Attack}");
-            else if (Type == ItemType.Armor) Console.Write($"| 방어력: {Defense}");
-            else if (Type == ItemType.Test) Console.Write($"| 공격력: {Attack} | 방어력: {Defense}");
+            if (Type == ItemType.Weapon) Console.Write($" | 공격력: {Attack}");
+            else if (Type == ItemType.Armor) Console.Write($" | 방어력: {Defense}");
+            else if (Type == ItemType.Test) Console.Write($" | 공격력: {Attack} | 방어력: {Defense}");
             Console.WriteLine($" | {Description}");
         }
 
