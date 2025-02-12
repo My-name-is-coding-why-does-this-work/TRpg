@@ -65,7 +65,7 @@ internal class Program
                 player.IClass = "마법사";
                 player.AddSkill(new Skill("체인 라이트닝", 40, 800, true, "번개를 공격력의 800% 데미지로 여려명에게 쏜다"));
                 player.AddSkill(new Skill("플레임 스윕", 40, 800, true, "화염을 공격력의 800% 데미지로 여려명에게 쏜다"));
-                player.AddSkill(new Skill("제네시스", 120, 100000, true, "성스러운 힘으로 공격력의 1000% 데미지로 여려명에게 쏜다"));
+                player.AddSkill(new Skill("제네시스", 120, 1000, true, "성스러운 힘으로 공격력의 1000% 데미지로 여려명에게 쏜다"));
                 break;
             case 4:
                 player.Attack = 15;
