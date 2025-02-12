@@ -106,6 +106,7 @@ namespace TRpg
                                     randomSkillAttack.Add(j);
                                 }
                             }
+                            break;
                         }
 
                     }

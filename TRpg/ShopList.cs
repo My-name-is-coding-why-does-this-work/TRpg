@@ -75,9 +75,12 @@ public class ShopList
         {
             Console.Clear();
             count = 1;
-            Console.WriteLine("\n-------------------------------------------\n");
+            Console.WriteLine("---------------------------------------------------\n");
             Console.WriteLine("\t\t상점");
-            Console.WriteLine("\n-------------------------------------------");
+            Console.WriteLine("\n---------------------------------------------------");
+
+            Console.WriteLine("                  @=====@\r\n                #=@       @=#_\r\n               # \\/\\/\\/\\/\\/\\ #\\\r\n               @@|  _   _  |@@(\r\n               @@|\\|_|-|_|/|@@ )\r\n                @|    /\\   |@ (\r\n                 |  \\~~~~/ |   )\r\n                 |   ~~~~  |   |\r\n                  \\_______/    |\r\n           _________|   |_______(____\r\n          /         \\   /      (     `\\\r\n         /  / |      \\ /      |-\\---,  \\\r\n _______/  /__|_______@_______|__)___\\  \\________\r\n|\\      \\  \\___   ______________#     |  |__     \\");
+            Console.WriteLine("---------------------------------------------------");
 
             foreach (ShopItem item in shopList)
             {
@@ -106,10 +109,10 @@ public class ShopList
 
     public void ShopBuy(Player player, out int act)
     {
-        Console.WriteLine("\n-------------------------------------------\n");
+        Console.WriteLine("\n---------------------------------------------------\n");
         Console.WriteLine("현재 G : " + player.Gold + "G\n");
         Console.WriteLine();
-        Console.WriteLine("구매할 아이템을 선택하세요. ( 0. 나가기  |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
+        Console.WriteLine("\n구매할 아이템을 선택하세요. ( 0. 나가기  |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
         Console.Write("\n>>");
         while (!int.TryParse(Console.ReadLine(), out act))
         {
