@@ -96,7 +96,7 @@ public class Battle(Player player)
 
             int select = 0;
             //수정 잘못된 선택지 했을때 다시입력하라는 텍스트 출력
-            while (!int.TryParse(Console.ReadLine(), out select) && select < 1 && select > 2) 
+            while (!int.TryParse(Console.ReadLine(), out select) || select < 1 && select > 2) //수정 : and를 or 조건으로 수정
             {
                 Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요");
                 Console.Write(">> ");
@@ -193,8 +193,9 @@ public class Battle(Player player)
                 }                
                 break;
             case 2:
-                BattleSkill.BattleSkillUI(player, BattleList, ref killCount);
-                doBattle();
+                bool playerSkillturn = true;
+                BattleSkill.BattleSkillUI(player, BattleList, ref killCount, ref playerSkillturn);
+                if (playerSkillturn) doBattle(); //수정 플레이어가 스킬 사용 안했을때만 doBattle로 이동
                 break;
         }
 	}

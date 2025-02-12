@@ -9,10 +9,10 @@ namespace TRpg
 {
     internal class BattleSkill
     {
-        public static void BattleSkillUI(Player player, List<Monster> BattleList, ref int killCount)
+        public static void BattleSkillUI(Player player, List<Monster> BattleList, ref int killCount, ref bool playerturn)
         {
-            bool playerturn = true;
-            while (playerturn) // 사용할 스킬 선택 반복문
+            bool playerSkillturn = true;
+            while (playerSkillturn) // 사용할 스킬 선택 반복문
             {
                 Console.Clear();
                 Console.WriteLine("Battle!!\n");
@@ -53,7 +53,7 @@ namespace TRpg
                 {
                     if (selectSkill == 0) //추가 0번 누르면 스킬 선택 반복문 정지
                     {
-                        playerturn = false;
+                        playerSkillturn = false;
                         break;
                     }
                     else if (selectSkill > 0 && selectSkill <= player.SkillList.Count && player.SkillList[selectSkill - 1].ManaCost > player.Mana)//수정 마나 부족 텍스트 출력
@@ -133,13 +133,14 @@ namespace TRpg
                             
                         }
                     }
+                    playerSkillturn = false;
                     playerturn = false;
                     break;
                 }
                 else
                 {
                     //스킬을 사용할 몬스터 선택
-                    while (playerturn)
+                    while (playerSkillturn)
                     {
                         Console.Clear();
                         Console.WriteLine("Battle!!\n");
@@ -190,6 +191,7 @@ namespace TRpg
                                 killCount++;
                                 Console.WriteLine($"{BattleList[input - 1].Name}의 체력이 0이 되었습니다.");
                             }
+                            playerSkillturn = false;
                             playerturn = false;
                             break;
                         }
