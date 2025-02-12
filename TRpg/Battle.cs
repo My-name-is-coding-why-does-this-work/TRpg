@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using TRpg;
 
 
@@ -10,6 +11,18 @@ public class Battle(Player player)
     List<Monster> BattleList; // 배틀이 시작하면 랜덤으로 몬스터를 
 
     public int killCount = 0; //몬스터 처치 수
+    
+    //전투 승리 시 지급할 몬스터 골드
+    public int GetGold(List<Monster> list)
+    {
+        int sum = 0;
+
+        foreach (Monster m in list) 
+        {
+            sum += m.Gold;
+        }
+        return sum;
+    }
 
     public void MakeList()
     {
@@ -68,12 +81,12 @@ public class Battle(Player player)
 
             Console.WriteLine("[내정보]");
             Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
-            Console.WriteLine($"HP 100/{player.Health}");
-
+            Console.WriteLine($"HP {player.Health}");
+            Console.WriteLine($"MP {player.Mana}");
 
             Console.WriteLine("\n[행동]\n");
             Console.WriteLine("1. 공격");
-            Console.WriteLine("2. 방어");
+            Console.WriteLine("2. 스킬");
             Console.WriteLine("\n원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
@@ -90,7 +103,7 @@ public class Battle(Player player)
             if (BattleList.Count == killCount)//몬스터 생존 여부 확인
             {
                 //몬스터 처치시
-                BattleEndPg.StageClear(player);
+                BattleEndPg.StageClear(player, GetGold(BattleList)); //전투 승리시 스테이지 클리어 및 골드 전달
                 //배틀 종료
                 break;
             }
@@ -140,7 +153,7 @@ public class Battle(Player player)
                     Console.WriteLine("[내정보]");
                     Console.WriteLine($"Lv.{player.Lv} {player.Name} ({player.IClass})");
                     Console.WriteLine($"HP {player.Health}");
-
+                    Console.WriteLine($"MP {player.Mana}");
 
                     Console.WriteLine("\n[행동]\n");
                     Console.WriteLine("\n공격할 몬스터를 선택해주세요.");
@@ -159,9 +172,11 @@ public class Battle(Player player)
 
                         // 수정 : 데미지 계산
                         int dmg = CalcDamage.CalcDmg(player, BattleList[input - 1]); 
-                        if(dmg != 0)
+                        if(dmg != -1)
                             Console.WriteLine($"{BattleList[input - 1].Name}이(가) {dmg} 데미지를 받았습니다.");
-                        else
+                        else Console.WriteLine($"{BattleList[input - 1].Name}이(가) 공격을 회피했습니다."); //회피 출력 추가
+
+                        if (BattleList[input - 1].IsDead)
                         {
                             killCount++;
                             Console.WriteLine($"{BattleList[input - 1].Name}의 체력이 0이 되었습니다.");
@@ -176,8 +191,7 @@ public class Battle(Player player)
                 }                
                 break;
             case "2":
-                //방어
-                Console.WriteLine("방어");
+                BattleSkill.BattleSkillUI(player, BattleList, ref killCount);
                 break;
         }
 	}

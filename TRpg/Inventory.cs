@@ -12,14 +12,14 @@ namespace TRpg
     {
         private List<Item> inventoryItem;
 
-        public static Inventory SingletonItemList; // 싱글톤
+        public static Inventory inventory; // 싱글톤 -> 수정 : 인벤토리로 이름 수정
         public static Inventory Instance()
         {
-            if (SingletonItemList == null)
+            if (inventory == null)
             {
-                SingletonItemList = new Inventory(); // 새로운 인스턴스 생성
+                inventory = new Inventory(); // 새로운 인스턴스 생성
             }
-            return SingletonItemList;
+            return inventory;
         }
 
         public Inventory() // 추가된 아이템 이름을 출력
@@ -127,7 +127,7 @@ namespace TRpg
                 // 0번을 입력하면 메인 화면으로 돌아가도록
                 if (input == "0")
                 {
-                    Program.StartMessage(player); // 메인 화면으로 돌아가기
+                    Program.Town(player); // 메인 화면으로 돌아가기
                     break;  // ShowInventory 종료
                 }
                 else
