@@ -25,11 +25,11 @@ public class ShopItem
 
     public void Inform() // 2.12 아이템 정보 출력
     {
-        Console.Write($"이름:  {Name}");
-        Console.Write($"| 타입: {Type}");
-        if (Type == ItemType.Weapon) Console.Write($"| 공격력: {Attack}");
-        else if (Type == ItemType.Armor) Console.Write($"| 방어력: {Defense}");
-        else if (Type == ItemType.Test) Console.Write($"| 공격력: {Attack} | 방어력: {Defense}");
+        Console.Write($"    {Name}");
+        Console.Write($"    |   장비 : {Type}");
+        if (Type == ItemType.Weapon) Console.Write($"   |   공격력 : {Attack}");
+        else if (Type == ItemType.Armor) Console.Write($"   | 방어력 : {Defense}");
+        else if (Type == ItemType.Test) Console.Write($"    | 공격력 : {Attack}     |   방어력 : {Defense}");
         Console.WriteLine($" | {Description} | {Price}");
     }
 
@@ -57,8 +57,14 @@ public class ShopList
     public void SettingShop() // 2.12 아이템 정보 수정
     {
        shopList.Add(new ShopItem("롱소드", ItemType.Weapon, 20, 0, 500, "평범한 롱소드다."));
-       shopList.Add(new ShopItem("낡은 방패", ItemType.Armor, 0, 10, 500, "평범한 방패다."));
-       
+       shopList.Add(new ShopItem("낡은 방패", ItemType.Armor, 0, 10 , 500 , "평범한 방패다."));
+       shopList.Add(new ShopItem("브라움의 방패", ItemType.Armor, 0, 20, 1000 , "자세히 보면 문인것 같다..."));
+       shopList.Add(new ShopItem("롱소드", ItemType.Weapon , 20 , 0 , 1000 , "평범한 롱소드다."));
+       shopList.Add(new ShopItem("몰락한 왕의 검", ItemType.Weapon , 0 , 30 , 1500, "몰락한 왕의 검이다 불길한 기운이 든다."));
+       shopList.Add(new ShopItem("롱소드", ItemType.Weapon , 30 , 0, 1500 , "평범한 롱소드다."));
+       shopList.Add(new ShopItem("롱소드", ItemType.Weapon , 20 , 0, 700 , "평범한 롱소드다."));
+       shopList.Add(new ShopItem("롱소드", ItemType.Weapon , 20 , 0, 700 , "평범한 롱소드다."));
+
     }
 
     public void ShopMenu(Player player)
@@ -75,7 +81,7 @@ public class ShopList
 
             foreach (ShopItem item in shopList)
             {
-                Console.WriteLine("-"+ count + " ");
+                Console.Write(count + "." + " ");
 
                 item.Inform();
                 count++;
@@ -85,8 +91,8 @@ public class ShopList
 
             if (act == 0)
             {
-                Console.WriteLine("마을로 돌아갑니다.");
-                Console.WriteLine("\n아무 키나 입력하세요.");
+                Console.WriteLine("0. 마을로 돌아갑니다.");
+                Console.WriteLine("아무키를 입력해주세요");
                 Console.ReadKey(true);
                 Program.Town(player);
                 break;
@@ -102,12 +108,12 @@ public class ShopList
     {
         Console.WriteLine("\n-------------------------------------------\n");
         Console.WriteLine("현재 G : " + player.Gold + "G\n");
-        Console.WriteLine("구매할 아이템을 선택하세요 ( 0 - 나가기 | 1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
+        Console.WriteLine("구매할 아이템을 선택하세요. ( 0. 나가기  |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
 
         while (!int.TryParse(Console.ReadLine(), out act))
         {
             Console.WriteLine("잘못된 입력입니다.");
-            Console.WriteLine("구매할 아이템을 선택하세요 ( 0 - 나가기 | 1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
+            Console.WriteLine("구매할 아이템을 선택하세요. ( 0. 나가기   |   1 ~ " + shopList.Count + " - 구매할 아이템 번호)");
         }
 
         if (act > 0 && act <= shopList.Count) // 2.12 아이템 구매 및 나가기 시 행동 실행
