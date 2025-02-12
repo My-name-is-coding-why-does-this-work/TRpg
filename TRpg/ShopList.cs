@@ -11,7 +11,7 @@ public class ShopItem
     public string shopList { get; set; }
     
 
-    public ShopItem(string name, int category, int stat, string desc, int price, bool isbuy)
+    public ShopItem(string name, int category, int stat, string desc, int price, bool isbuy = false) // isbuy = false 추가
     {
         Name = name;
         Category = category;
@@ -34,9 +34,9 @@ public class ShopList
 
     public void SettingShop()
     {
-       shopList.Add(new ShopItem("검"(int)category.Weapon,5,0,100 );
-       shopList.Add(new ShopItem("방패"(int)category.Weapon,10,0,100 );
-       shopList.Add(new ShopItem("갑옷"(int)category.Weapon,10,0,100 );
+       shopList.Add(new ShopItem("검", (int)category.Weapon,5,0,100 ));
+       shopList.Add(new ShopItem("방패",(int)category.Weapon,10,0,100 ));
+       shopList.Add(new ShopItem("갑옷", (int)category.Weapon,10,0,100 ));
        
     }
 
