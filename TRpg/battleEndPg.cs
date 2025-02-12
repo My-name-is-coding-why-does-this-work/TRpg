@@ -1,11 +1,13 @@
 
+using TRpg;
+
 public static class BattleEndPg
 {
-    private static List<Item> RewardItems = new List<Item> // 추가: 보상 아이템 목록(임시로 추가)
+    private static List<Item> RewardItems = new List<Item> //수정 : Item 클래스에 맞게 수정
     {
-        new Item("전사의 검", "칼", 15, 0, "전사들이 애용하는 검"),
-        new Item("수호자의 방패", "방어구", 10, 0, "튼튼한 방패"),
-        new Item("치유의 포션", "반지", 0, 0, "체력을 조금 회복시켜주는 반지")
+        new Item("전사의 검", ItemType.Weapon, 20, 0, 500, "전사들이 애용하는 검"),
+        new Item("수호자의 방패", ItemType.Armor, 20, 0, 500, "튼튼한 방패"),
+        new Item("포션병", ItemType.Weapon, 20, 0, 1000,"수상할 정도로 부서지지 않는 포션병이다.")
     };
 
 
@@ -20,25 +22,18 @@ public static class BattleEndPg
 
             // 아이템 보상 지급
             Item rewardItem = RewardItems[new Random().Next(RewardItems.Count)];
-            Console.WriteLine($"아이템 획득: {rewardItem.Name} (+{rewardItem.StatBoost})");
-            player.inventory.AddItem(rewardItem);
+            Console.WriteLine($"아이템 획득: {rewardItem.Name}");
+            Inventory.inventory.AddItem(rewardItem);
 
-            Console.WriteLine("1. 다음 스테이지");
-            Console.WriteLine("2. 마을로 이동하기");
+            Console.WriteLine("1. 마을로 이동하기");
 
             Console.Write("\n당신의 선택: ");
 
             string input = Console.ReadLine();
             switch (input)
             {
-                case "1":// 수정 : 미구현 부분 주석 처리
-                         //                   player.nextStage();
-                         //                   break;
-                    Console.WriteLine("미구현된 기능입니다. 마을로 돌아갑니다.");
-                    Program.StartMessage(player);
-                    break;
-                case "2": 
-                    Program.StartMessage(player);
+                case "1":
+                    Program.Town(player);
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다. 1~2 사이의 숫자를 입력하세요.");

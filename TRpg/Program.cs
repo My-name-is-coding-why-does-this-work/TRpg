@@ -15,11 +15,12 @@ internal class Program
         Player player = new Player("코난", 1, 10, 5, 100, 100, 1500, "전사");
         
         var _SingletonItemList = Inventory.Instance();
+        var _Shop = ShopList.Instance();
         ItemList itemList = new ItemList(); // 아이템 리스트 생성
         Program program = new Program();
-        Inventory.SingletonItemList.AddItem(itemList.itemLists[0]); // 아이템을 인벤토리에 추가
-        Inventory.SingletonItemList.AddItem(itemList.itemLists[1]); // 아이템을 인벤토리에 추가
-
+        Inventory.inventory.AddItem(itemList.itemLists[0]); // 아이템을 인벤토리에 추가
+        Inventory.inventory.AddItem(itemList.itemLists[1]); // 아이템을 인벤토리에 추가
+        ShopList shop = new ShopList();
 
         StartMessage(player); //수정 : 매개 변수 추가
     }
@@ -101,6 +102,11 @@ internal class Program
         }
         SelectClass(player, inputClass);
 
+        Town(player);
+    }
+
+
+    static public void Town(Player player){
         Console.Clear();
         Console.WriteLine("***** 스파르타 던전에 오신것을 환영합니다! *****");
         Console.WriteLine("1. 상태 보기");
@@ -122,19 +128,20 @@ internal class Program
                     string statusInput = Console.ReadLine();
                     if (statusInput == "0")
                     {
-                        StartMessage(player);
+                        Town(player);
                         return; // StartMessage로 돌아가도록 break 대신 return 사용
                     }
                     break;
 
                 case "2":
                     Console.Clear();
-                    Inventory.SingletonItemList.ShowInventory(player); // player 객체 전달
+                    Inventory.inventory.ShowInventory(player); // player 객체 전달
                     break;
 
                 case "3":
                     Console.Clear();
                     Console.WriteLine("1. 상점 보기");
+                    ShopList.shop.ShopMenu(player);
                     break;
 
                 case "4":

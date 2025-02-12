@@ -48,10 +48,10 @@ namespace TRpg
     public class ItemList // 아이템리스트
     {
             public List<Item> itemLists = new List<Item>();
-        public ItemList()
+        public ItemList() // 수정 : 가격 수정
         {
-            itemLists.Add(new Item("단검", ItemType.Weapon, 10, 0, 0, "수련용 단검이다."));
-            itemLists.Add(new Item("천갑옷", ItemType.Armor, 0, 15, 0, "평범한 천갑옷이다."));
+            itemLists.Add(new Item("단검", ItemType.Weapon, 10, 0, 100, "수련용 단검이다."));
+            itemLists.Add(new Item("천갑옷", ItemType.Armor, 0, 15, 100, "평범한 천갑옷이다."));
             itemLists.Add(new Item("롱소드", ItemType.Weapon, 20, 0, 1000, "평범한 롱소드다."));
             itemLists.Add(new Item("몰락한 왕의 검", ItemType.Weapon, 30, 0, 1000, "몰락한 왕의 검이다 불길한 기운이 든다."));
             itemLists.Add(new Item("낡은 방패", ItemType.Armor, 0, 10, 1000, "평범한 방패다."));
